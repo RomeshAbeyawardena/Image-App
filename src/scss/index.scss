@@ -60,4 +60,8 @@ div.title-panel
 #image-placeholder {
     display: block;
     margin:auto;
+
+    &.fullscreen {
+        width: 100%;
+    }
 }

@@ -14,6 +14,7 @@
     watch(isPopupShown, (newValue:boolean) => {
         if(newValue)
         {
+            console.log(newValue);
             instance.value?.update();
         }
     });
