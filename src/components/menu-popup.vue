@@ -52,7 +52,7 @@ function createPopup(parentElement: Element | null = null, popupElement: HTMLEle
     if (popupElement == null) {
         return undefined;
     }
-    
+
     instance.value = createPopper(parentElement, popupElement, {
         placement: 'bottom-end'
     });

@@ -10,9 +10,9 @@ export const createimageStore = defineStore("image-store", () => {
     const files = ref(new Array<string>());
     const fileIndex = ref(0);
 
-    async function getFiles(fileList:string):Promise<string[]> {
+    async function getFiles(fileList: string): Promise<string[]> {
         const storedFiles = await imageLoader.value.getFiles(fileList);
-        
+
         const mappedFiles = storedFiles.map((f, i) => ({
             index: i,
             fileName: f,
@@ -28,21 +28,19 @@ export const createimageStore = defineStore("image-store", () => {
 
         index = imageLoader.value.getNextIndex(index, files.value);
 
-        if(index != fileIndex.value) {
+        if (index != fileIndex.value) {
             fileIndex.value = index;
         }
 
         return getImageFileByIndex(fileIndex.value);
     });
 
-    function getFileByIndex(index:number):string|undefined
-    {
+    function getFileByIndex(index: number): string | undefined {
         return imageLoader.value.getNextFile(index, files.value);
     }
 
-    function getImageFileByIndex(index:number):IImageFile|undefined
-    {
-        if(imageFiles.value == undefined){
+    function getImageFileByIndex(index: number): IImageFile | undefined {
+        if (imageFiles.value == undefined) {
             return undefined;
         }
 
@@ -57,5 +55,8 @@ export const createimageStore = defineStore("image-store", () => {
         fileIndex.value--;
     }
 
-    return {imageLoader, imageFiles, fileUtility, currentImage, fileIndex, files, increment, decrement, getFiles, getImageFileByIndex, getFileByIndex};
+    return {
+        imageLoader, imageFiles, fileUtility, currentImage, fileIndex, files,
+        increment, decrement, getFiles, getImageFileByIndex, getFileByIndex
+    };
 });

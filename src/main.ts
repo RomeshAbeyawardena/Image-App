@@ -8,9 +8,9 @@ import App from './App.vue';
 
 window.addEventListener("DOMContentLoaded", (event) => {
     if (!/eruda=true/.test(window.location.toString()) && localStorage.getItem('active-eruda') != 'true') return;
-    eruda.init();    
+    eruda.init();
 });
 
 createApp(App)
-.use(createPinia())
-.mount('#app')
+    .use(createPinia())
+    .mount('#app')

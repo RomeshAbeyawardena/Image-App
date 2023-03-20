@@ -5,7 +5,7 @@ import { computed } from 'vue';
 import { createMainStore } from '../stores/main';
 
 const props = defineProps({
-    filterSearch:String
+    filterSearch: String
 });
 const emit = defineEmits(["imageSelected"]);
 const store = createMainStore();
@@ -15,22 +15,21 @@ const { isPopupShown } = storeToRefs(store);
 const { fileIndex, imageFiles } = storeToRefs(imageStore);
 
 const filteredImageFiles = computed(() => {
-    if(props.filterSearch == undefined){
+    if (props.filterSearch == undefined) {
         return imageFiles.value;
     }
 
     return imageFiles.value.filter(f => f.fileName.includes(props.filterSearch!));
 })
 
-function selectImage(index:number){
+function selectImage(index: number) {
     emit("imageSelected", index);
     isPopupShown.value = false;
     fileIndex.value = index;
 }
 
-function setLinkClass(currentIndex:number):string{
-    if(currentIndex == fileIndex.value)
-    {
+function setLinkClass(currentIndex: number): string {
+    if (currentIndex == fileIndex.value) {
         return "highlighted"
     }
 
@@ -41,9 +40,8 @@ function setLinkClass(currentIndex:number):string{
 <template>
     <ul class="menu">
         <li v-for="imageFile in filteredImageFiles" class="menu-item">
-            <a @click="selectImage(imageFile.index)" 
-            :class="setLinkClass(imageFile.index)" 
-            :title="imageFile.name" href="#">{{ imageFile.name }}</a>
+            <a @click="selectImage(imageFile.index)" :class="setLinkClass(imageFile.index)" :title="imageFile.name"
+                href="#">{{ imageFile.name }}</a>
         </li>
     </ul>
 </template>

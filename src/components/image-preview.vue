@@ -4,13 +4,13 @@ import { onMounted, ref } from "vue";
 const emit = defineEmits(['toggleSelectPopup', 'toggleFullScreenMode']);
 
 const props = defineProps({
-    fullScreenMode:Boolean
+    fullScreenMode: Boolean
 });
 
 const innerWidth = ref(window.innerWidth);
 
 const imageStore = createimageStore();
-onMounted(async() => {
+onMounted(async () => {
     document.addEventListener("resize", () => {
         setImagePlaceholderSize();
     });
@@ -18,10 +18,10 @@ onMounted(async() => {
     setImagePlaceholderSize();
 });
 
-function setImagePlaceholderSize(){
+function setImagePlaceholderSize() {
     const imageElement = document.getElementById("image-placeholder");
 
-    if(imageElement == null){
+    if (imageElement == null) {
         return;
     }
 
@@ -29,7 +29,7 @@ function setImagePlaceholderSize(){
 }
 
 function setFullScreenClass(): string {
-    if(props.fullScreenMode) {
+    if (props.fullScreenMode) {
         return "fullscreen";
     }
 
@@ -50,8 +50,7 @@ function imageSelect_OnClick() {
         <h1 id="title-heading">{{ imageStore.currentImage?.name }}</h1>
         <a class="image-select" href="#" @click="imageSelect_OnClick" role="menu">Select</a>
     </div>
-    <img    :alt="imageStore.currentImage?.name" @click="image_OnClick" 
-            :src="imageStore.currentImage?.fileName" id="image-placeholder" 
-            :class="setFullScreenClass()"/>
+    <img :alt="imageStore.currentImage?.name" @click="image_OnClick" :src="imageStore.currentImage?.fileName"
+        id="image-placeholder" :class="setFullScreenClass()" />
     <input type="hidden" value="-1" id="index-field" />
 </template>

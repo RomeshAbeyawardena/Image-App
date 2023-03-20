@@ -22,7 +22,7 @@ onMounted(() => {
       }
     }
 
-    if(fullScreenMode.value && ev.key == ESCAPE){
+    if (fullScreenMode.value && ev.key == ESCAPE) {
       fullScreenMode.value = !fullScreenMode.value;
     }
   });
@@ -35,13 +35,16 @@ onMounted(() => {
   var initialY: number = 0;
 
   function startTouch(e: TouchEvent) {
+    if (isPopupShown.value) {
+      return;
+    }
+
     initialX = e.touches[0].clientX;
     initialY = e.touches[0].clientY;
   };
 
   function moveTouch(e: TouchEvent) {
-    if(isPopupShown.value)
-    {
+    if (isPopupShown.value) {
       return;
     }
 
