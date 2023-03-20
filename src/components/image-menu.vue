@@ -2,16 +2,19 @@
 import { createimageStore } from '../stores/image-store';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
+import { createMainStore } from '../stores/main';
 
 const props = defineProps({
     filterSearch:String
 });
 const emit = defineEmits(["imageSelected"]);
+const store = createMainStore();
 const imageStore = createimageStore();
+
+const { isPopupShown } = storeToRefs(store);
 const { fileIndex, imageFiles } = storeToRefs(imageStore);
 
 const filteredImageFiles = computed(() => {
-    
     if(props.filterSearch == undefined){
         return imageFiles.value;
     }
@@ -21,6 +24,7 @@ const filteredImageFiles = computed(() => {
 
 function selectImage(index:number){
     emit("imageSelected", index);
+    isPopupShown.value = false;
     fileIndex.value = index;
 }
 
