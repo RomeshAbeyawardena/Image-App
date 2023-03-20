@@ -8,7 +8,7 @@ div.menu-popup {
     display: block;
     height: 10rem;
     border: 0.05rem solid #4D4D4B;
-    padding: 1rem;
+    padding: 0.5rem;
     overflow-y: auto;
     width: 12rem;
     background: #080808;
@@ -22,9 +22,18 @@ div.menu-popup {
     li.menu-item {
         overflow: hidden;
         white-space: nowrap;
-        padding: 0.2rem 0;
         word-spacing: initial;
         margin: 0;
+        a {
+            text-decoration: none;
+            color: #fff;
+            padding: 0.3rem 0;
+            display: block;
+
+            &.highlighted {
+                background-color: navy;
+            }
+        }
     }
    } 
 }

@@ -13,7 +13,8 @@ export const createimageStore = defineStore("image-store", () => {
     async function getFiles(fileList:string):Promise<string[]> {
         const storedFiles = await imageLoader.value.getFiles(fileList);
         
-        const mappedFiles = storedFiles.map(f => ({
+        const mappedFiles = storedFiles.map((f, i) => ({
+            index: i,
             fileName: f,
             name: fileUtility.value.getFileName(f)
         } as IImageFile));
