@@ -17,6 +17,7 @@ const instance = ref<Instance>();
 
 watch(fullScreenMode, async (newValue: boolean) => {
     if (!newValue) {
+        isPopupShown.value = false;
         window.setTimeout(() => createPopup(), 500);
     }
 });
@@ -24,7 +25,7 @@ watch(fullScreenMode, async (newValue: boolean) => {
 watch(isPopupShown, async (newValue: boolean) => {
     if (newValue) {
         if (instance.value != undefined) {
-            console.log(await instance.value.update());
+            await instance.value.update();
         }
     }
 });
