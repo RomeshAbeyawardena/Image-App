@@ -46,7 +46,7 @@ function imageSelect_OnClick() {
 </script>
 <template>
     <div v-if="!fullScreenMode" class="title-panel">
-        <p>{{ innerWidth }}</p>
+        <!--<p>{{ innerWidth }}</p>-->
         <h1 id="title-heading">{{ imageStore.currentImage?.name }}</h1>
         <a class="image-select" href="#" @click="imageSelect_OnClick" role="menu">Select</a>
     </div>

@@ -54,10 +54,11 @@ body {
                     padding: 0.3rem 0;
                     display: block;
                     
-                    &:hover {
+                    &:hover,
+                    &:active {
                         background-color: steelblue;
                     }
-                    
+
                     &.highlighted {
                         background-color: navy;
                     }

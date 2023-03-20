@@ -40,6 +40,11 @@ onMounted(() => {
   };
 
   function moveTouch(e: TouchEvent) {
+    if(isPopupShown.value)
+    {
+      return;
+    }
+
     if (initialX === null) {
       return;
     }
