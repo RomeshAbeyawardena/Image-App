@@ -56,7 +56,7 @@ function createPopup(parentElement: Element | null = null, popupElement: HTMLEle
     instance.value = createPopper(parentElement, popupElement, {
         placement: 'bottom-end'
     });
-    console.log("instance built");
+
     return instance.value;
 }
 
