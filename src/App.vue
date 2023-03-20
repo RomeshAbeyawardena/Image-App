@@ -29,10 +29,13 @@ onMounted(() => {
 
   document.addEventListener("touchstart", startTouch, false);
   document.addEventListener("touchmove", moveTouch, false);
+  document.addEventListener("touchend", endTouch, false);
 
   // Swipe Up / Down / Left / Right
-  var initialX: number = 0;
-  var initialY: number = 0;
+  let initialX: number = 0;
+  let initialY: number = 0;
+  let currentX: number = 0;
+  let currentY: number = 0;
 
   function startTouch(e: TouchEvent) {
     if (isPopupShown.value) {
@@ -56,18 +59,20 @@ onMounted(() => {
       return;
     }
 
-    var currentX: number = e.touches[0].clientX;
-    var currentY: number = e.touches[0].clientY;
+    currentX = e.touches[0].clientX;
+    currentY = e.touches[0].clientY;
+  }
 
+  function endTouch(e: TouchEvent) {
     var diffX: number = initialX - currentX;
     var diffY: number = initialY - currentY;
-
+    
     if (Math.abs(diffX) > Math.abs(diffY)) {
       // sliding horizontally
-      if (diffX > 0) {
+      if (diffX > 100) {
         // swiped left
         imageStore.increment();
-      } else {
+      } else if(diffX < -100) {
         // swiped right
         imageStore.decrement();
       }
