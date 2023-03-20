@@ -9,8 +9,13 @@ export const createimageStore = defineStore("image-store", () => {
     const imageFiles = ref(new Array<IImageFile>());
     const files = ref(new Array<string>());
     const fileIndex = ref(0);
+    const isLoaded = ref(false);
 
     async function getFiles(fileList: string): Promise<string[]> {
+        if(isLoaded.value){
+            return files.value;
+        }
+
         const storedFiles = await imageLoader.value.getFiles(fileList);
 
         const mappedFiles = storedFiles.map((f, i) => ({
@@ -20,6 +25,7 @@ export const createimageStore = defineStore("image-store", () => {
         } as IImageFile));
         imageFiles.value = mappedFiles;
         files.value = storedFiles;
+        isLoaded.value = true;
         return storedFiles;
     }
 

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { createimageStore } from "../stores/image-store";
 import { onMounted, ref } from "vue";
+import { EnvironmentVariables } from "../variables/environment-variables";
+
 const emit = defineEmits(['toggleSelectPopup', 'toggleFullScreenMode']);
 
 const props = defineProps({
@@ -14,7 +16,7 @@ onMounted(async () => {
     document.addEventListener("resize", () => {
         setImagePlaceholderSize();
     });
-    await imageStore.getFiles("files.json");
+    await imageStore.getFiles(EnvironmentVariables.Default.fileList);
     setImagePlaceholderSize();
 });
 
