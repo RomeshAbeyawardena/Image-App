@@ -67,10 +67,10 @@ onMounted(() => {
       // sliding vertically
       if (diffY > 0) {
         // swiped up
-        console.log("swiped up");
+        imageStore.increment();
       } else {
         // swiped down
-        console.log("swiped down");
+        imageStore.decrement();
       }
     }
 

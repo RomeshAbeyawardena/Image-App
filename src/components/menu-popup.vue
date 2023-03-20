@@ -1,49 +1,72 @@
 <script setup lang="ts">
-    import { watch, onMounted, ref } from "vue";
-    import { createPopper, Instance } from "@popperjs/core";
-    import { createMainStore } from "../stores/main";
-    import { storeToRefs } from "pinia";
-    import imageMenu from "./image-menu.vue";
-    const props = defineProps({
-        visible:Boolean,
-        parentElementSelector:String
-    });
+import { watch, onMounted, ref } from "vue";
+import { createPopper, Instance } from "@popperjs/core";
+import { createMainStore } from "../stores/main";
+import { storeToRefs } from "pinia";
+import imageMenu from "./image-menu.vue";
 
-    const store = createMainStore();
-    const { isPopupShown } = storeToRefs(store)
-    const instance = ref<Instance>();
-    watch(isPopupShown, (newValue:boolean) => {
-        if(newValue)
-        {
-            console.log(newValue);
-            instance.value?.update();
-        }
-    });
-    onMounted(() => {
-        const popupElement:HTMLElement = document
-            .querySelector("div.menu-popup") as HTMLElement;
-        
-        if(popupElement == null) {
-                return;
-        }
-        
-        if(props.parentElementSelector != undefined) {
-            const parentElement = document
-                .querySelector(props.parentElementSelector);
-            
-            if(parentElement == null){
-                return;
-            }
+const props = defineProps({
+    visible: Boolean,
+    parentElementSelector: String
+});
 
-            instance.value = createPopper(parentElement, popupElement, {
-                placement: 'bottom-end'
-            });
+const searchText = ref("");
+const store = createMainStore();
+const { fullScreenMode, isPopupShown } = storeToRefs(store)
+const instance = ref<Instance>();
+
+watch(fullScreenMode, async (newValue: boolean) => {
+    if (!newValue) {
+        window.setTimeout(() => createPopup(), 500);
+    }
+});
+
+watch(isPopupShown, async (newValue: boolean) => {
+    if (newValue) {
+        if (instance.value != undefined) {
+            console.log(await instance.value.update());
         }
+    }
+});
+
+function createPopup(parentElement: Element | null = null, popupElement: HTMLElement | null = null): Instance | undefined {
+
+    if (props.parentElementSelector == undefined) {
+        return undefined;
+    }
+
+    if (parentElement == null) {
+        parentElement = document
+            .querySelector(props.parentElementSelector);
+    }
+
+    if (parentElement == null) {
+        return undefined;
+    }
+
+    if (popupElement == null) {
+        popupElement = document.querySelector("div.menu-popup");
+    }
+
+    if (popupElement == null) {
+        return undefined;
+    }
+    
+    instance.value = createPopper(parentElement, popupElement, {
+        placement: 'bottom-end'
     });
+    console.log("instance built");
+    return instance.value;
+}
+
+onMounted(() => {
+    createPopup();
+});
 </script>
 
 <template>
-  <div v-show="visible" class="menu-popup">
-        <imageMenu />
+    <div v-show="visible" class="menu-popup">
+        <input type="text" v-model="searchText" />
+        <imageMenu :filter-search="searchText" />
     </div>
 </template>

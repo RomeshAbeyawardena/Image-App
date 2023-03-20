@@ -5,16 +5,29 @@ html {
 }
 
 div.menu-popup {
-    display: block;
-    height: 10rem;
-    border: 0.05rem solid #4D4D4B;
-    padding: 0.5rem;
-    overflow-y: auto;
-    width: 12rem;
     background: #080808;
     border-radius: 0.3rem;
-    
+    border: 0.05rem solid #4D4D4B;
+    display: block;
+    height: 10rem;
+    padding: 0.5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 12rem;
+
+    input {
+        background: #4D4D4B;
+        border: 0.1rem solid #4D4D4B;
+        border-radius: 0.5rem;
+        margin-bottom: 0.2rem;
+        color: #fff;
+        display: block;
+        font-family: 'Inter', sans-serif;
+        width: 98%
+    }
+
    ul.menu {
+    display: block;
     list-style-type: none;
     margin-block-start: 0;
     margin: 0;
