@@ -3,6 +3,7 @@
     import { createPopper, Instance } from "@popperjs/core";
     import { createMainStore } from "../stores/main";
     import { storeToRefs } from "pinia";
+    import imageMenu from "./image-menu.vue";
     const props = defineProps({
         visible:Boolean,
         parentElementSelector:String
@@ -43,8 +44,6 @@
 
 <template>
   <div v-show="visible" class="menu-popup">
-        <ul class="menu">
-            
-        </ul>
+        <imageMenu />
     </div>
 </template>

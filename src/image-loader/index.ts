@@ -19,7 +19,7 @@ export class ImageLoader implements IImageLoader
             return files.length - 1;
         }
 
-        if(index > files.length)
+        if(index > files.length - 1)
         {
             return 0;
         }

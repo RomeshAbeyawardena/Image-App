@@ -9,7 +9,6 @@ div.menu-popup {
     height: 10rem;
     border: 0.05rem solid #4D4D4B;
     padding: 1rem;
-    margin: 1rem;
     overflow-y: auto;
     width: 12rem;
     background: #080808;
@@ -49,8 +48,8 @@ div.title-panel
         display: block;
         margin: 1rem;
         padding: 1rem;
-        width: fit-content;
         width: -moz-fit-content;
+        width: fit-content;
     }
 
     #title-heading{

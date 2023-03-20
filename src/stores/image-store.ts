@@ -6,11 +6,18 @@ import { ImageLoader } from "../image-loader";
 export const createimageStore = defineStore("image-store", () => {
     const imageLoader = ref(new ImageLoader());
     const fileUtility = ref(new FileUtility());
-    const files = ref<Array<string>>();
+    const imageFiles = ref(new Array<IImageFile>());
+    const files = ref(new Array<string>());
     const fileIndex = ref(0);
 
     async function getFiles(fileList:string):Promise<string[]> {
         const storedFiles = await imageLoader.value.getFiles(fileList);
+        
+        const mappedFiles = storedFiles.map(f => ({
+            fileName: f,
+            name: fileUtility.value.getFileName(f)
+        } as IImageFile));
+        imageFiles.value = mappedFiles;
         files.value = storedFiles;
         return storedFiles;
     }
@@ -18,27 +25,27 @@ export const createimageStore = defineStore("image-store", () => {
     const currentImage = computed(() => {
         let index = fileIndex.value;
 
-        index = imageLoader.value.getNextIndex(index);
+        index = imageLoader.value.getNextIndex(index, files.value);
 
-        if(index != fileIndex.value){
+        if(index != fileIndex.value) {
             fileIndex.value = index;
         }
 
-        const file = getFileByIndex(fileIndex.value);
-
-        if(file == undefined){
-            return {} as IImageFile;
-        }
-
-        return {
-            fileName: file,
-            name: fileUtility.value.getFileName(file)
-        } as IImageFile;
+        return getImageFileByIndex(fileIndex.value);
     });
 
     function getFileByIndex(index:number):string|undefined
     {
         return imageLoader.value.getNextFile(index, files.value);
+    }
+
+    function getImageFileByIndex(index:number):IImageFile|undefined
+    {
+        if(imageFiles.value == undefined){
+            return undefined;
+        }
+
+        return imageFiles.value.at(index);
     }
 
     function increment() {
@@ -49,5 +56,5 @@ export const createimageStore = defineStore("image-store", () => {
         fileIndex.value--;
     }
 
-    return {imageLoader, fileUtility, currentImage, fileIndex, files, increment, decrement, getFiles, getFileByIndex};
+    return {imageLoader, imageFiles, fileUtility, currentImage, fileIndex, files, increment, decrement, getFiles, getImageFileByIndex, getFileByIndex};
 });
