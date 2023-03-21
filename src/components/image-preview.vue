@@ -47,6 +47,10 @@ function setFullScreenClass(): string {
     return "";
 }
 
+function zoom_OnClick() {
+    zoomMode.value = true;
+}
+
 function close_OnClick() {
     zoomMode.value = false;
 }
@@ -61,7 +65,9 @@ function imageSelect_OnClick() {
 </script>
 <template>
     <div v-if="!fullScreenMode" class="title-panel">
-        <!--<p>{{ innerWidth }}</p>-->
+        <a class="zoom-btn" href="#" @click="zoom_OnClick">
+            <font-awesome-icon icon="magnifying-glass-plus" />
+        </a>
         <h1 id="title-heading">{{ currentImage?.name }}</h1>
         <a class="image-select" href="#" @click="imageSelect_OnClick" role="menu">Select</a>
     </div>
