@@ -28,69 +28,86 @@ onMounted(() => {
   });
 
   document.addEventListener("touchstart", startTouch, false);
-  document.addEventListener("touchmove", moveTouch, false);
   document.addEventListener("touchend", endTouch, false);
 
   // Swipe Up / Down / Left / Right
-  let initialX: number = 0;
-  let initialY: number = 0;
-  let currentX: number = 0;
-  let currentY: number = 0;
+  let initialX: number | null = null;
+  let initialY: number | null = null;
+  let currentX: number | null = null;
+  let currentY: number | null = null;
+  let startTime: number | null = null;
+
+  function resetFields() {
+    initialX = null;
+    initialY = null;
+    startTime = null;
+  }
 
   function startTouch(e: TouchEvent) {
     if (isPopupShown.value) {
       return;
     }
-
+    startTime = new Date().getTime();
     initialX = e.touches[0].clientX;
     initialY = e.touches[0].clientY;
   };
 
-  function moveTouch(e: TouchEvent) {
-    if (isPopupShown.value) {
-      return;
-    }
-
-    if (initialX === null) {
-      return;
-    }
-
-    if (initialY === null) {
-      return;
-    }
-
-    currentX = e.touches[0].clientX;
-    currentY = e.touches[0].clientY;
-  }
 
   function endTouch(e: TouchEvent) {
-    var diffX: number = initialX - currentX;
-    var diffY: number = initialY - currentY;
-    
-    if (Math.abs(diffX) > Math.abs(diffY)) {
+    if (isPopupShown.value) {
+      resetFields();
+      return;
+    }
+
+    if (initialX == null) {
+      resetFields();
+      return;
+    }
+
+    if (initialY == null) {
+      resetFields();
+      return;
+    }
+
+    if (startTime == null) {
+      resetFields();
+      return;
+    }
+
+    const offset = 0;
+    var changedTouch = e.changedTouches[0];
+    console.log(changedTouch);
+    //if(changedTouch.target)
+
+    currentX = changedTouch.clientX;
+    currentY = changedTouch.clientY;
+
+    let diffX: number = initialX - currentX;
+    let diffY: number = initialY - currentY;
+    let currentTime = new Date().getTime();
+
+    let elapsedTime = currentTime - startTime;
+
+    let bypass: boolean = true;
+
+    if (elapsedTime < 200 && Math.abs(diffX) > Math.abs(diffY)) {
       // sliding horizontally
-      if (diffX > 100) {
+      if (diffX > offset) {
         // swiped left
+        bypass = false;
         imageStore.increment();
-      } else if(diffX < -100) {
+      } else if (diffX < -offset) {
         // swiped right
-        imageStore.decrement();
-      }
-    } else {
-      // sliding vertically
-      if (diffY > 0) {
-        // swiped up
-        imageStore.increment();
-      } else {
-        // swiped down
+        bypass = false;
         imageStore.decrement();
       }
     }
 
-    initialX = 0;
-    initialY = 0;
+    if (!bypass) {
+      e.preventDefault();
+    }
 
-    e.preventDefault();
+    resetFields();
   };
 
 });
