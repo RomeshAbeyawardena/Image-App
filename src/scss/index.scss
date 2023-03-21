@@ -96,7 +96,7 @@ body {
             background: #4D4D4B;
             border-radius: 0.3rem;
             display: block;
-            margin: 1rem;
+            margin-left: 1rem;
             padding: 1rem;
             width: -moz-fit-content;
             width: fit-content;
@@ -126,7 +126,7 @@ body {
         background-repeat: no-repeat;
         background-position: 50%;
         background-size: 100%;
-        @media (max-width: 400px) {
+        @media (max-width: 412px) {
             background-size: auto;
         }
         position: absolute;
