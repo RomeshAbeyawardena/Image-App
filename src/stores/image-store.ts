@@ -50,17 +50,7 @@ export const createimageStore = defineStore("image-store", () => {
     }
 
     async function preRender() {
-        var previousFile = getFileByIndex(fileIndex.value-1);
-
-        if(previousFile != undefined)
-        {
-            await Axios(previousFile).then(e => console.log(e.status));
-        }
-        var nextFile = getFileByIndex(fileIndex.value+1);
-        if(nextFile != undefined)
-        {
-            await Axios(nextFile).then(e => console.log(e.status));
-        }
+        
     }
 
     async function increment() {

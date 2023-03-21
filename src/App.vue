@@ -105,7 +105,8 @@ function toggleFullScreenMode(e: boolean) {
 </script>
 
 <template>
-  <menuPopup :visible="isPopupShown" parent-element-selector="a.image-select"></menuPopup>
+  <menuPopup :visible="isPopupShown" parent-element-selector="a.image-select" />
   <imagePreview :full-screen-mode="fullScreenMode" @toggle-full-screen-mode="toggleFullScreenMode"
-    @toggle-select-popup="toggleSelectPopup"></imagePreview>
+    @toggle-select-popup="toggleSelectPopup" />
+  
 </template>

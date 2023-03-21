@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { createimageStore } from "../stores/image-store";
 import { onMounted, ref } from "vue";
+import imageZoom from '../components/image-zoom.vue';
 const emit = defineEmits(['toggleSelectPopup', 'toggleFullScreenMode']);
 
 const props = defineProps({
@@ -50,5 +51,5 @@ function imageSelect_OnClick() {
     </div>
     <img :alt="imageStore.currentImage?.name" @click="image_OnClick" :src="imageStore.currentImage?.fileName"
         id="image-placeholder" :class="setFullScreenClass()" />
-    <input type="hidden" value="-1" id="index-field" />
+    <imageZoom :image-url="imageStore.currentImage?.fileName" />
 </template>
