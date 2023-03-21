@@ -54,27 +54,13 @@ onMounted(() => {
 
 
   function endTouch(e: TouchEvent) {
-    if (isPopupShown.value) {
-      resetFields();
-      return;
-    }
-
-    if (initialX == null) {
-      resetFields();
-      return;
-    }
-
-    if (initialY == null) {
-      resetFields();
-      return;
-    }
-
-    if (startTime == null) {
+    if (isPopupShown.value || initialX == null || initialY == null || startTime == null) {
       resetFields();
       return;
     }
 
     const offset = 0;
+    const timeOffSet = 200;
     var changedTouch = e.changedTouches[0];
     
     currentX = changedTouch.clientX;
@@ -88,7 +74,7 @@ onMounted(() => {
 
     let bypass: boolean = true;
 
-    if (elapsedTime < 200 && Math.abs(diffX) > Math.abs(diffY)) {
+    if (elapsedTime < timeOffSet && Math.abs(diffX) > Math.abs(diffY)) {
       // sliding horizontally
       if (diffX > offset) {
         // swiped left
