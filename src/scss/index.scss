@@ -126,6 +126,9 @@ body {
         background-repeat: no-repeat;
         background-position: 50%;
         background-size: 100%;
+        @media (max-width: 400px) {
+            background-size: auto;
+        }
         position: absolute;
         top:0;
         width: 100%;
