@@ -49,22 +49,16 @@ export const createimageStore = defineStore("image-store", () => {
         return imageFiles.value.at(index);
     }
 
-    async function preRender() {
-        
-    }
-
     async function increment() {
         fileIndex.value++;
-        await preRender();
     }
 
     async function decrement() {
         fileIndex.value--;
-        await preRender();
     }
 
     return {
         imageLoader, imageFiles, fileUtility, currentImage, fileIndex, files,
-        increment, decrement, getFiles, getImageFileByIndex, getFileByIndex, preRender
+        increment, decrement, getFiles, getImageFileByIndex, getFileByIndex
     };
 });

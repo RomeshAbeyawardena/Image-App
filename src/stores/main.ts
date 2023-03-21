@@ -4,5 +4,6 @@ import { ref } from "vue";
 export const createMainStore = defineStore('main', () => {
     const isPopupShown = ref(false);
     const fullScreenMode = ref(false);
-    return { isPopupShown, fullScreenMode };
+    const zoomMode = ref(false);
+    return { isPopupShown, fullScreenMode, zoomMode };
 });

@@ -1,15 +1,27 @@
 <script setup lang="ts">
+import { createMainStore } from "../stores/main";
 import { createimageStore } from "../stores/image-store";
 import { onMounted, ref } from "vue";
 import imageZoom from '../components/image-zoom.vue';
+import { storeToRefs } from "pinia";
 const emit = defineEmits(['toggleSelectPopup', 'toggleFullScreenMode']);
 
 const props = defineProps({
     fullScreenMode: Boolean
 });
 
+const store = createMainStore();
+const { zoomMode } = storeToRefs(store);
 const imageStore = createimageStore();
+const { currentImage } = storeToRefs(imageStore);
+
 onMounted(async () => {
+    document.addEventListener("keyup", (e:KeyboardEvent) => {
+        if(e.key == "Escape"){
+            zoomMode.value = false;
+            e.preventDefault();
+        }
+    });
     document.addEventListener("resize", () => {
         setImagePlaceholderSize();
     });
@@ -35,6 +47,10 @@ function setFullScreenClass(): string {
     return "";
 }
 
+function close_OnClick() {
+    zoomMode.value = false;
+}
+
 function image_OnClick() {
     emit("toggleFullScreenMode", !props.fullScreenMode);
 }
@@ -46,10 +62,10 @@ function imageSelect_OnClick() {
 <template>
     <div v-if="!fullScreenMode" class="title-panel">
         <!--<p>{{ innerWidth }}</p>-->
-        <h1 id="title-heading">{{ imageStore.currentImage?.name }}</h1>
+        <h1 id="title-heading">{{ currentImage?.name }}</h1>
         <a class="image-select" href="#" @click="imageSelect_OnClick" role="menu">Select</a>
     </div>
-    <img :alt="imageStore.currentImage?.name" @click="image_OnClick" :src="imageStore.currentImage?.fileName"
+    <img :alt="currentImage?.name" @click="image_OnClick" :src="currentImage?.fileName"
         id="image-placeholder" :class="setFullScreenClass()" />
-    <imageZoom :image-url="imageStore.currentImage?.fileName" />
+    <imageZoom :image-url="currentImage?.fileName" v-if="zoomMode" @close-zoomer="close_OnClick" />
 </template>
