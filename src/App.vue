@@ -76,9 +76,7 @@ onMounted(() => {
 
     const offset = 0;
     var changedTouch = e.changedTouches[0];
-    console.log(changedTouch);
-    //if(changedTouch.target)
-
+    
     currentX = changedTouch.clientX;
     currentY = changedTouch.clientY;
 

@@ -3,6 +3,8 @@ import { computed, ref } from "vue";
 import { FileUtility } from "../file-utility";
 import { IImageFile } from "../image";
 import { ImageLoader } from "../image-loader";
+import Axios from "axios";
+
 export const createimageStore = defineStore("image-store", () => {
     const imageLoader = ref(new ImageLoader());
     const fileUtility = ref(new FileUtility());
@@ -47,16 +49,32 @@ export const createimageStore = defineStore("image-store", () => {
         return imageFiles.value.at(index);
     }
 
-    function increment() {
-        fileIndex.value++;
+    async function preRender() {
+        var previousFile = getFileByIndex(fileIndex.value-1);
+
+        if(previousFile != undefined)
+        {
+            await Axios(previousFile).then(e => console.log(e.status));
+        }
+        var nextFile = getFileByIndex(fileIndex.value+1);
+        if(nextFile != undefined)
+        {
+            await Axios(nextFile).then(e => console.log(e.status));
+        }
     }
 
-    function decrement() {
+    async function increment() {
+        fileIndex.value++;
+        await preRender();
+    }
+
+    async function decrement() {
         fileIndex.value--;
+        await preRender();
     }
 
     return {
         imageLoader, imageFiles, fileUtility, currentImage, fileIndex, files,
-        increment, decrement, getFiles, getImageFileByIndex, getFileByIndex
+        increment, decrement, getFiles, getImageFileByIndex, getFileByIndex, preRender
     };
 });

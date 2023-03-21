@@ -7,8 +7,6 @@ const props = defineProps({
     fullScreenMode: Boolean
 });
 
-const innerWidth = ref(window.innerWidth);
-
 const imageStore = createimageStore();
 onMounted(async () => {
     document.addEventListener("resize", () => {
