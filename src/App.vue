@@ -4,11 +4,12 @@ import { createimageStore } from './stores/image-store';
 import menuPopup from './components/menu-popup.vue';
 import imagePreview from "./components/image-preview.vue";
 import loader from './components/loader.vue';
-import { onMounted, watch } from 'vue';
+import { onMounted, watch, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import MenuNav from './components/menu-nav.vue';
+import Toast from './components/toast.vue';
 const store = createMainStore();
-const { isLoading, isPopupShown, fullScreenMode } = storeToRefs(store);
+const { isLoading, isPopupShown, fullScreenMode, notification } = storeToRefs(store);
 const imageStore = createimageStore();
 
 const { currentImage } = storeToRefs(imageStore);
@@ -105,18 +106,26 @@ onMounted(() => {
 
 });
 
+const timeOutId = ref(0)
 function comment_onBlur(){
-  imageStore.saveChanges();
+  
+  if(timeOutId.value) {
+    clearTimeout(timeOutId.value);
+    timeOutId.value = 0;
+  }
+  
+  timeOutId.value = setTimeout(imageStore.saveChanges, 1500);
 }
 
 </script>
 
 <template>
+  <Toast :data="notification" />
   <loader />
   <menuPopup :visible="isPopupShown" parent-element-selector="a.image-select-btn" />
   <MenuNav />
   <imagePreview />
   <div v-if="!fullScreenMode" class="text-field">
-    <input type="text" v-model="currentImage.comment" @blur="comment_onBlur" placeholder="Comment" />
+    <input type="text" v-model="currentImage.comment" @keyup="comment_onBlur" placeholder="Comment" />
   </div>
 </template>

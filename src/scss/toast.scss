@@ -1,0 +1,22 @@
+@import './colours.scss';
+
+div.toast {
+    background-color: $color-primary-0;  
+    position: absolute;
+    opacity: 0.8;
+    padding-top: 0.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 1rem;
+    top: 0;
+    left: 0;
+    width: -moz-fit-content;
+    width: fit-content;
+    .toast-heading {
+        margin:0;
+        margin-bottom: 0.5rem;
+    }
+    .toast-body {
+        margin: 0;
+    }
+}

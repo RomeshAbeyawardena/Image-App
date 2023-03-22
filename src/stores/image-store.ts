@@ -4,6 +4,8 @@ import { Backend, IBackend } from "../backend";
 import { FileUtility, IFileUtility } from "../file-utility";
 import { IImageFile } from "../image";
 import { IImageLoader, ImageLoader } from "../image-loader";
+import { createMainStore } from "./main";
+import { Toast } from "../toast";
 
 export const createimageStore = defineStore("image-store", () => {
     const imageLoader = ref<IImageLoader>(new ImageLoader());
@@ -13,6 +15,7 @@ export const createimageStore = defineStore("image-store", () => {
     const files = ref(new Array<string>());
     const fileIndex = ref(0);
     const intervalIndex = ref(0);
+    const store = createMainStore();
 
     async function getFiles(fileList: string): Promise<string[]> {
         const storedFiles = await imageLoader.value.getFiles(fileList);
@@ -26,8 +29,10 @@ export const createimageStore = defineStore("image-store", () => {
         imageFiles.value = mappedFiles;
         files.value = storedFiles;
 
-        console.log(
-        backend.value.load(imageFiles.value));
+        if(backend.value.load(imageFiles.value))
+        {
+            store.notify("Backend", "Data loaded", 3000);
+        }
 
         return storedFiles;
     }
@@ -58,8 +63,8 @@ export const createimageStore = defineStore("image-store", () => {
 
     function saveChanges()
     {
-        if(backend.value.save(imageFiles.value)){
-            console.log("Changes saved");
+        if(backend.value.save(imageFiles.value)) {
+            store.notify("Backend", "Changes saved", 3000);
         }
     }
 
