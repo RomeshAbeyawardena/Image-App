@@ -5,5 +5,6 @@ export const createMainStore = defineStore('main', () => {
     const isPopupShown = ref(false);
     const fullScreenMode = ref(false);
     const zoomMode = ref(false);
-    return { isPopupShown, fullScreenMode, zoomMode };
+    const isLoading = ref(false);
+    return { isLoading, isPopupShown, fullScreenMode, zoomMode };
 });

@@ -6,7 +6,7 @@ import imageZoom from '../components/image-zoom.vue';
 import { storeToRefs } from "pinia";
 
 const store = createMainStore();
-const {  fullScreenMode, zoomMode } = storeToRefs(store);
+const { isLoading, fullScreenMode, zoomMode } = storeToRefs(store);
 const imageStore = createimageStore();
 const { currentImage } = storeToRefs(imageStore);
 
@@ -50,9 +50,13 @@ function image_OnClick() {
     fullScreenMode.value = !fullScreenMode.value;
 }
 
+function image_Onloaded() {
+    isLoading.value = false;
+}
+
 </script>
 <template>
     <img :alt="currentImage?.name" @click="image_OnClick" :src="currentImage?.fileName"
-        id="image-placeholder" :class="setFullScreenClass()" />
+        id="image-placeholder" @load="image_Onloaded" :class="setFullScreenClass()" />
     <imageZoom :image-url="currentImage?.fileName" v-if="zoomMode" @close-zoomer="close_OnClick" />
 </template>

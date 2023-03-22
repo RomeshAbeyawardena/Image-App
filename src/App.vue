@@ -3,13 +3,20 @@ import { createMainStore } from './stores/main';
 import { createimageStore } from './stores/image-store';
 import menuPopup from './components/menu-popup.vue';
 import imagePreview from "./components/image-preview.vue";
-import imageMenu from './components/image-menu.vue';
-import { onMounted } from 'vue';
+import loader from './components/loader.vue';
+import { onMounted, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import MenuNav from './components/menu-nav.vue';
 const store = createMainStore();
-const { isPopupShown, fullScreenMode } = storeToRefs(store);
+const { isLoading, isPopupShown, fullScreenMode } = storeToRefs(store);
 const imageStore = createimageStore();
+
+const { currentImage } = storeToRefs(imageStore);
+
+watch(currentImage, () => {
+  isLoading.value = true;
+});
+
 onMounted(() => {
   document.addEventListener("keyup", (ev: KeyboardEvent) => {
     const ARROW_LEFT = "ArrowLeft";
@@ -107,6 +114,7 @@ function toggleFullScreenMode(e: boolean) {
 </script>
 
 <template>
+  <loader />
   <menuPopup :visible="isPopupShown" parent-element-selector="a.image-select-btn" />
   <MenuNav />
   <imagePreview />
