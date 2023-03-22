@@ -84,6 +84,7 @@ body {
             display: block;
             margin-right: 1rem;
             padding: 1rem;
+            width: -moz-fit-content;
             width: fit-content;
         }
 
@@ -150,6 +151,7 @@ body {
             text-decoration: none;
             opacity: 0.5;
             margin: 0.5rem;
+            width: -moz-fit-content;
             width: fit-content;
         }
     }
