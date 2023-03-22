@@ -26,7 +26,7 @@ function prepareImageZoomElement() {
         return;
     }
     const url = encodeURIComponent(props.imageUrl); 
-    console.log(url);
+    
     imageZoomElement.value.style.backgroundImage = "url('" 
         + url + "')";
     return imageZoomElement.value;

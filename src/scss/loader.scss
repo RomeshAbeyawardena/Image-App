@@ -1,7 +1,10 @@
+@import './colours.scss';
+
 .loader {
     position: absolute;
     left: 50%;
     top: 50%;
+    margin-left:-40px;
 .lds-roller {
     display: inline-block;
     position: relative;
@@ -19,7 +22,7 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #fff;
+    background: $color-primary-0;
     margin: -4px 0 0 -4px;
   }
   .lds-roller div:nth-child(1) {
