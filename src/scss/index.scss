@@ -115,6 +115,7 @@ body {
 
     img {
         border: none;
+        outline: none;
     }
 
     #image-placeholder {
@@ -150,5 +151,9 @@ body {
             width: -moz-fit-content;
             width: fit-content;
         }
+    }
+
+    input.text-search {
+        background-color: $background-primary;
     }
 }

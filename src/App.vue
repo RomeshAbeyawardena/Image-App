@@ -125,7 +125,7 @@ function comment_onBlur(){
   <menuPopup :visible="isPopupShown" parent-element-selector="a.image-select-btn" />
   <MenuNav />
   <imagePreview />
-  <div v-if="!fullScreenMode" class="text-field">
+  <div v-if="!fullScreenMode" class="text-field search-field">
     <input type="text" v-model="currentImage.comment" @keyup="comment_onBlur" placeholder="Comment" />
   </div>
 </template>
