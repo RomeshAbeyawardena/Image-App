@@ -86,6 +86,11 @@ body {
             margin-right: 1rem;
             width: -moz-fit-content;
             width: fit-content;
+
+            &.disabled {
+                background-color: $color-primary-2;
+                cursor: not-allowed;
+            }
         }
 
         h1 {
