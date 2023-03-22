@@ -1,0 +1,36 @@
+a.btn,
+button.btn {
+    background-color: $color-primary-3;
+    border-radius: 0.3rem;
+    color: $white;
+    padding: 1rem;
+}
+
+a.btn {
+    display: block;
+    text-decoration: none;
+}
+
+div.text-field {
+    background-color: #fff;
+    border: 1px inset $black;
+    border-radius: 0.3rem;
+    display: block;
+    margin:0.5rem;
+    &.inline {
+        display: inline;
+    }
+    
+    padding: 0.5rem;
+    input {
+        &:focus,
+        &:focus-visible,
+        &:focus-within{
+            border: none;
+            outline: none;
+        }
+        border: none;
+        outline: none;
+        width: 100%;
+    }
+}

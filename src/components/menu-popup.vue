@@ -67,7 +67,9 @@ onMounted(() => {
 
 <template>
     <div v-show="visible" class="menu-popup">
-        <input type="text" v-model="searchText" />
+        <div class="text-field">
+            <input type="text" v-model="searchText" />
+        </div>
         <imageMenu :filter-search="searchText" />
     </div>
 </template>

@@ -65,11 +65,11 @@ function imageSelect_OnClick() {
 </script>
 <template>
     <div v-if="!fullScreenMode" class="title-panel">
-        <a class="zoom-btn" href="#" @click="zoom_OnClick">
+        <a class="btn zoom-btn" href="#" @click="zoom_OnClick">
             <font-awesome-icon icon="magnifying-glass-plus" />
         </a>
         <h1 id="title-heading">{{ currentImage?.name }}</h1>
-        <a class="image-select" href="#" @click="imageSelect_OnClick" role="menu">Select</a>
+        <a class="btn image-select-btn" href="#" @click="imageSelect_OnClick" role="menu">Select</a>
     </div>
     <img :alt="currentImage?.name" @click="image_OnClick" :src="currentImage?.fileName"
         id="image-placeholder" :class="setFullScreenClass()" />

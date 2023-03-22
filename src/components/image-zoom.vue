@@ -71,7 +71,7 @@ function mouseZoomMove(e: MouseEvent) {
 </script>
 <template>
     <div class="image-zoom" @touchmove="touchZoomMove" @mousemove="mouseZoomMove">
-        <a class="close-btn" href="#" @click="close">
+        <a class="btn close-btn" href="#" @click="close">
             <font-awesome-icon icon="xmark" />
         </a>
     </div>
