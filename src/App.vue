@@ -3,8 +3,10 @@ import { createMainStore } from './stores/main';
 import { createimageStore } from './stores/image-store';
 import menuPopup from './components/menu-popup.vue';
 import imagePreview from "./components/image-preview.vue";
+import imageMenu from './components/image-menu.vue';
 import { onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
+import MenuNav from './components/menu-nav.vue';
 const store = createMainStore();
 const { isPopupShown, fullScreenMode } = storeToRefs(store);
 const imageStore = createimageStore();
@@ -106,8 +108,8 @@ function toggleFullScreenMode(e: boolean) {
 
 <template>
   <menuPopup :visible="isPopupShown" parent-element-selector="a.image-select-btn" />
-  <imagePreview :full-screen-mode="fullScreenMode" @toggle-full-screen-mode="toggleFullScreenMode"
-    @toggle-select-popup="toggleSelectPopup" />
+  <MenuNav />
+  <imagePreview />
   <div class="text-field">
     <input type="text" placeholder="Comment" />
   </div>
