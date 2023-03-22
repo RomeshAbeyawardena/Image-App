@@ -19,7 +19,10 @@ const filteredImageFiles = computed(() => {
         return imageFiles.value;
     }
 
-    return imageFiles.value.filter(f => f.fileName.toLowerCase().includes(props.filterSearch!.toLowerCase()));
+    return imageFiles.value.filter(f => f.fileName.toLowerCase()
+        .includes(props.filterSearch!.toLowerCase())
+        || f.comment!.toLowerCase().includes(props.filterSearch!.toLowerCase())
+    );
 })
 
 function selectImage(index: number) {

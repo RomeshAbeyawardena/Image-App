@@ -18,7 +18,8 @@ export const createimageStore = defineStore("image-store", () => {
         const mappedFiles = storedFiles.map((f, i) => ({
             index: i,
             fileName: f,
-            name: fileUtility.value.getFileName(f)
+            name: fileUtility.value.getFileName(f),
+            comment: ""
         } as IImageFile));
         imageFiles.value = mappedFiles;
         files.value = storedFiles;
@@ -41,12 +42,12 @@ export const createimageStore = defineStore("image-store", () => {
         return imageLoader.value.getNextFile(index, files.value);
     }
 
-    function getImageFileByIndex(index: number): IImageFile | undefined {
+    function getImageFileByIndex(index: number): IImageFile {
         if (imageFiles.value == undefined) {
-            return undefined;
+            return { index:-1, fileName: "", name: "", comment: "" };
         }
 
-        return imageFiles.value.at(index);
+        return imageFiles.value.at(index) ?? { index:-1, fileName: "", name: "", comment: "" };
     }
 
     async function increment() {
