@@ -109,6 +109,6 @@ function toggleFullScreenMode(e: boolean) {
   <imagePreview :full-screen-mode="fullScreenMode" @toggle-full-screen-mode="toggleFullScreenMode"
     @toggle-select-popup="toggleSelectPopup" />
   <div class="text-field">
-    <input type="text" />
+    <input type="text" placeholder="Comment" />
   </div>
 </template>
