@@ -11,13 +11,15 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 /* import specific icons */
-import { faMagnifyingGlassPlus, faXmark, faHourglassEnd } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlassPlus, faXmark, faHourglassEnd } 
+    from '@fortawesome/free-solid-svg-icons';
 
 /* add icons to the library */
 library.add(faMagnifyingGlassPlus, faXmark, faHourglassEnd);
 
 window.addEventListener("DOMContentLoaded", (event) => {
-    if (!/eruda=true/.test(window.location.toString()) && localStorage.getItem('active-eruda') != 'true') return;
+    if (!/eruda=true/.test(window.location.toString()) 
+        && localStorage.getItem('active-eruda') != 'true') return;
     eruda.init();
 });
 
