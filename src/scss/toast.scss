@@ -2,11 +2,11 @@
 
 div.toast {
     background-color: $color-primary-0;  
-    position: absolute;
-    opacity: 0.8;
+    position:fixed;
+    opacity: 1;
     margin-top:0.5rem;
     padding-top: 0.5rem;
-    padding-left: 2rem;
+    padding-left: 1rem;
     padding-right: 2rem;
     padding-bottom: 1rem;
     top: 0;
