@@ -1,16 +1,18 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
-import { FileUtility } from "../file-utility";
+import { Backend, IBackend } from "../backend";
+import { FileUtility, IFileUtility } from "../file-utility";
 import { IImageFile } from "../image";
-import { ImageLoader } from "../image-loader";
-import Axios from "axios";
+import { IImageLoader, ImageLoader } from "../image-loader";
 
 export const createimageStore = defineStore("image-store", () => {
-    const imageLoader = ref(new ImageLoader());
-    const fileUtility = ref(new FileUtility());
+    const imageLoader = ref<IImageLoader>(new ImageLoader());
+    const fileUtility = ref<IFileUtility>(new FileUtility());
     const imageFiles = ref(new Array<IImageFile>());
+    const backend = ref<IBackend>(new Backend());
     const files = ref(new Array<string>());
     const fileIndex = ref(0);
+    const intervalIndex = ref(0);
 
     async function getFiles(fileList: string): Promise<string[]> {
         const storedFiles = await imageLoader.value.getFiles(fileList);
@@ -23,6 +25,10 @@ export const createimageStore = defineStore("image-store", () => {
         } as IImageFile));
         imageFiles.value = mappedFiles;
         files.value = storedFiles;
+
+        console.log(
+        backend.value.load(imageFiles.value));
+
         return storedFiles;
     }
 
@@ -50,6 +56,13 @@ export const createimageStore = defineStore("image-store", () => {
         return imageFiles.value.at(index) ?? { index:-1, fileName: "", name: "", comment: "" };
     }
 
+    function saveChanges()
+    {
+        if(backend.value.save(imageFiles.value)){
+            console.log("Changes saved");
+        }
+    }
+
     async function increment() {
         fileIndex.value++;
     }
@@ -58,8 +71,9 @@ export const createimageStore = defineStore("image-store", () => {
         fileIndex.value--;
     }
 
-    return {
+    return { backend,
         imageLoader, imageFiles, fileUtility, currentImage, fileIndex, files,
-        increment, decrement, getFiles, getImageFileByIndex, getFileByIndex
+        increment, decrement, getFiles, getImageFileByIndex, getFileByIndex,
+        saveChanges
     };
 });

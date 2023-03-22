@@ -104,13 +104,11 @@ onMounted(() => {
   };
 
 });
-function toggleSelectPopup() {
-  isPopupShown.value = !isPopupShown.value;
+
+function comment_onBlur(){
+  imageStore.saveChanges();
 }
 
-function toggleFullScreenMode(e: boolean) {
-  fullScreenMode.value = e;
-}
 </script>
 
 <template>
@@ -119,6 +117,6 @@ function toggleFullScreenMode(e: boolean) {
   <MenuNav />
   <imagePreview />
   <div v-if="!fullScreenMode" class="text-field">
-    <input type="text" v-model="currentImage.comment" placeholder="Comment" />
+    <input type="text" v-model="currentImage.comment" @blur="comment_onBlur" placeholder="Comment" />
   </div>
 </template>
