@@ -7,7 +7,7 @@ html {
 
 
 body {
-    background-color: #353536;
+    background-color: $background-primary;
     color: $white;
 }
 
@@ -89,11 +89,12 @@ body {
         }
 
         h1 {
+            flex-grow: 1;
+            margin: 0;
             overflow: hidden;
+            text-overflow: ellipsis;
             white-space: nowrap;
             word-spacing: initial;
-            margin: 0;
-            text-overflow: ellipsis;
         }
 
         a.image-select {
