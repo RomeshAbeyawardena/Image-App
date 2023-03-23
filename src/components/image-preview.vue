@@ -35,7 +35,7 @@ function setImagePlaceholderSize() {
 }
 
 function setFullScreenClass(): string {
-    if (fullScreenMode) {
+    if (fullScreenMode.value) {
         return "fullscreen";
     }
 
