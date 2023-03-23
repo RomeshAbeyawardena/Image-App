@@ -3,15 +3,15 @@ export interface IImageFile {
     fileName: string;
     name: string;
     comment?: string;
-    lastUpdated?:Date;
+    lastUpdated?: Date;
 }
 
 export class ImageFile implements IImageFile {
-    static create(index:number,
-            fileName:string,
-            name:string | undefined,
-            comment:string|undefined,
-            lastUpdated:Date|undefined) :IImageFile {
+    static create(index: number,
+        fileName: string,
+        name: string | undefined,
+        comment: string | undefined,
+        lastUpdated: Date | undefined): IImageFile {
         const image = new ImageFile();
         image.index = index;
         image.comment = comment;
@@ -21,10 +21,10 @@ export class ImageFile implements IImageFile {
 
         return image;
     }
-    
+
     index: number = -1;
     fileName: string = "";
     name: string = "";
     comment?: string;
-    lastUpdated?:Date;
+    lastUpdated?: Date;
 }

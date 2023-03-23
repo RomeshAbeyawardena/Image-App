@@ -10,14 +10,14 @@ export const createMainStore = defineStore('main', () => {
     const notification = ref<IToastNotification>(new ToastNotification());
     const showBottomToolbar = ref(false);
 
-    function notify(heading:string,body:string|undefined,interval:number|null){
+    function notify(heading: string, body: string | undefined, interval: number | null) {
         const toast = ToastNotification.create(heading, body, false);
         setNotification(toast, interval);
     }
-    function setNotification(toast:IToastNotification, interval:number|null){
+    function setNotification(toast: IToastNotification, interval: number | null) {
         notification.value = toast;
-        
-        if(interval != null) {
+
+        if (interval != null) {
             notification.value.visible = true;
             window.setTimeout(() => {
                 notification.value.visible = false;
@@ -25,6 +25,8 @@ export const createMainStore = defineStore('main', () => {
         }
     }
 
-    return { isLoading, isPopupShown, fullScreenMode, notify, 
-                notification, setNotification, zoomMode, showBottomToolbar };
+    return {
+        isLoading, isPopupShown, fullScreenMode, notify,
+        notification, setNotification, zoomMode, showBottomToolbar
+    };
 });

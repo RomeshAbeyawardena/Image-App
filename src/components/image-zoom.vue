@@ -25,9 +25,9 @@ function prepareImageZoomElement() {
     if (props.imageUrl == undefined) {
         return;
     }
-    const url = encodeURIComponent(props.imageUrl); 
-    
-    imageZoomElement.value.style.backgroundImage = "url('" 
+    const url = encodeURIComponent(props.imageUrl);
+
+    imageZoomElement.value.style.backgroundImage = "url('"
         + url + "')";
     return imageZoomElement.value;
 }

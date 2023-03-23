@@ -73,7 +73,7 @@ onMounted(() => {
     const offset = 0;
     const timeOffSet = 200;
     var changedTouch = e.changedTouches[0];
-    
+
     currentX = changedTouch.clientX;
     currentY = changedTouch.clientY;
 
@@ -108,13 +108,13 @@ onMounted(() => {
 });
 
 const timeOutId = ref(0)
-function comment_onBlur(){
+function comment_onBlur() {
   currentImage.value.lastUpdated = new Date();
-  if(timeOutId.value) {
+  if (timeOutId.value) {
     clearTimeout(timeOutId.value);
     timeOutId.value = 0;
   }
-  
+
   timeOutId.value = setTimeout(imageStore.saveChanges, 1500);
 }
 

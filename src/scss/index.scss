@@ -25,13 +25,14 @@ body {
         width: 12rem;
         overflow-x: hidden;
         overflow-y: auto;
-        
+
         .text-field {
             background: $background-primary;
             margin: 0.1rem;
             margin-bottom: 0.5rem;
             padding: 0.4rem;
-            input {                
+
+            input {
                 background: $background-primary;
                 color: $white;
                 display: block;
@@ -46,7 +47,7 @@ body {
             margin-block-start: 0;
             list-style-type: none;
             padding: 0;
-            
+
 
             li.menu-item {
                 margin: 0;
@@ -157,19 +158,20 @@ body {
         background-color: $background-primary;
     }
 
-    div.btn-bottom-tab {        
+    div.btn-bottom-tab {
         background-color: $color-primary-0;
         border-top-left-radius: 0.3rem;
         border-top-right-radius: 0.3rem;
         bottom: 0;
-        clear:right;
-        float:right; 
+        clear: right;
+        float: right;
         margin-right: 0.5rem;
         position: sticky;
         padding: 0 1rem;
         text-align: right;
         width: -moz-fit-content;
-        width:fit-content;
+        width: fit-content;
+
         a.btn {
             background-color: $color-primary-0;
         }
@@ -182,16 +184,23 @@ body {
         display: flex;
         padding: 0.2rem 0.5rem;
         position: sticky;
+
         div.spacer {
             flex-grow: 1;
         }
+
         a.btn {
             background-color: $color-primary-0;
         }
-        h1,h2,h3,h4.h5,p {
+
+        h1,
+        h2,
+        h3,
+        h4.h5,
+        p {
             margin: 0;
             padding: 0;
         }
-        
+
     }
 }

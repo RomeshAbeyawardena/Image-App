@@ -23,8 +23,7 @@ export const createimageStore = defineStore("image-store", () => {
         imageFiles.value = mappedFiles;
         files.value = storedFiles;
 
-        if(backend.value.load(imageFiles.value))
-        {
+        if (backend.value.load(imageFiles.value)) {
             store.notify("Backend", "Data loaded", 3000);
         }
 
@@ -49,15 +48,14 @@ export const createimageStore = defineStore("image-store", () => {
 
     function getImageFileByIndex(index: number): IImageFile {
         if (imageFiles.value == undefined) {
-            return { index:-1, fileName: "", name: "", comment: "" };
+            return { index: -1, fileName: "", name: "", comment: "" };
         }
 
-        return imageFiles.value.at(index) ?? { index:-1, fileName: "", name: "", comment: "" };
+        return imageFiles.value.at(index) ?? { index: -1, fileName: "", name: "", comment: "" };
     }
 
-    function saveChanges()
-    {
-        if(backend.value.save(imageFiles.value)) {
+    function saveChanges() {
+        if (backend.value.save(imageFiles.value)) {
             store.notify("Backend", "Changes saved", 3000);
         }
     }
@@ -70,7 +68,8 @@ export const createimageStore = defineStore("image-store", () => {
         fileIndex.value--;
     }
 
-    return { backend,
+    return {
+        backend,
         imageLoader, imageFiles, fileUtility, currentImage, fileIndex, files,
         increment, decrement, getFiles, getImageFileByIndex, getFileByIndex,
         saveChanges
