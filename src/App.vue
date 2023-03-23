@@ -8,6 +8,7 @@ import { onMounted, watch, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import MenuNav from './components/menu-nav.vue';
 import Toast from './components/toast.vue';
+import bottomNav from './components/bottom-nav.vue';
 const store = createMainStore();
 const { isLoading, isPopupShown, fullScreenMode, notification } = storeToRefs(store);
 const imageStore = createimageStore();
@@ -128,4 +129,5 @@ function comment_onBlur(){
   <div v-if="!fullScreenMode" class="text-field search-field">
     <input type="text" v-model="currentImage.comment" @keyup="comment_onBlur" placeholder="Comment" />
   </div>
+  <bottomNav />
 </template>

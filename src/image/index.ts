@@ -13,6 +13,7 @@ export class ImageFile implements IImageFile {
             comment:string|undefined,
             lastUpdated:Date|undefined) :IImageFile {
         const image = new ImageFile();
+        image.index = index;
         image.comment = comment;
         image.fileName = fileName;
         image.name = name ?? fileName;
