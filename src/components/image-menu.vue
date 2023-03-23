@@ -29,6 +29,7 @@ function selectImage(index: number) {
     emit("imageSelected", index);
     isPopupShown.value = false;
     fileIndex.value = index;
+    console.log(index);
 }
 
 function setLinkClass(currentIndex: number): string {

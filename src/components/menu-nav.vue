@@ -13,7 +13,7 @@ function zoom_OnClick() {
     }
 }
 function setZoomBtnIcon() {
-    if(isLoading.value) {
+    if (isLoading.value) {
         return "hourglass-end";
     }
 
@@ -22,7 +22,7 @@ function setZoomBtnIcon() {
 function setZoomBtnClass() {
     const baseClass = "btn zoom-btn";
 
-    if(isLoading.value) {
+    if (isLoading.value) {
         return baseClass + " disabled";
     }
 

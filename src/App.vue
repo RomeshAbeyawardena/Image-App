@@ -8,6 +8,7 @@ import { onMounted, watch, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import MenuNav from './components/menu-nav.vue';
 import Toast from './components/toast.vue';
+import bottomNav from './components/bottom-nav.vue';
 const store = createMainStore();
 const { isLoading, isPopupShown, fullScreenMode, notification } = storeToRefs(store);
 const imageStore = createimageStore();
@@ -72,7 +73,7 @@ onMounted(() => {
     const offset = 0;
     const timeOffSet = 200;
     var changedTouch = e.changedTouches[0];
-    
+
     currentX = changedTouch.clientX;
     currentY = changedTouch.clientY;
 
@@ -107,13 +108,13 @@ onMounted(() => {
 });
 
 const timeOutId = ref(0)
-function comment_onBlur(){
-  
-  if(timeOutId.value) {
+function comment_onBlur() {
+  currentImage.value.lastUpdated = new Date();
+  if (timeOutId.value) {
     clearTimeout(timeOutId.value);
     timeOutId.value = 0;
   }
-  
+
   timeOutId.value = setTimeout(imageStore.saveChanges, 1500);
 }
 
@@ -130,4 +131,5 @@ function comment_onBlur(){
           tabindex="-1"  
           @keyup="comment_onBlur" placeholder="Comment" />
   </div>
+  <bottomNav />
 </template>

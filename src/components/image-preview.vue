@@ -11,8 +11,8 @@ const imageStore = createimageStore();
 const { currentImage } = storeToRefs(imageStore);
 
 onMounted(async () => {
-    document.addEventListener("keyup", (e:KeyboardEvent) => {
-        if(e.key == "Escape"){
+    document.addEventListener("keyup", (e: KeyboardEvent) => {
+        if (e.key == "Escape") {
             zoomMode.value = false;
             e.preventDefault();
         }
@@ -35,7 +35,7 @@ function setImagePlaceholderSize() {
 }
 
 function setFullScreenClass(): string {
-    if (fullScreenMode) {
+    if (fullScreenMode.value) {
         return "fullscreen";
     }
 
@@ -56,7 +56,7 @@ function image_Onloaded() {
 
 </script>
 <template>
-    <img :alt="currentImage?.name" @click="image_OnClick" :src="currentImage?.fileName"
-        id="image-placeholder" @load="image_Onloaded" :class="setFullScreenClass()" />
+    <img :alt="currentImage?.name" @click="image_OnClick" :src="currentImage?.fileName" id="image-placeholder"
+        @load="image_Onloaded" :class="setFullScreenClass()" />
     <imageZoom :image-url="currentImage?.fileName" v-if="zoomMode" @close-zoomer="close_OnClick" />
 </template>
