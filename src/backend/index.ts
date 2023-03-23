@@ -26,15 +26,21 @@ export class Backend implements IBackend {
         
         const imagesToSave = imageFiles.filter(i => { 
             const image = this.get<IImageFile>(i.fileName);
+
+            if(i.comment == undefined)
+            {
+                return false;
+            }
+
             if(i.lastUpdated == undefined || image == null || image.lastUpdated == undefined)
             {
-                return i.comment.length;
+                return i.comment.length > 0;
             }
 
             const newLastUpdated = dayjs(i.lastUpdated);
             const oldLastUpdated = dayjs(image.lastUpdated);
 
-            return newLastUpdated.isAfter(oldLastUpdated) && i.comment.length;
+            return newLastUpdated.isAfter(oldLastUpdated) && i.comment.length > 0;
         });
 
         imagesToSave.forEach(i => this.set(i.fileName, i));

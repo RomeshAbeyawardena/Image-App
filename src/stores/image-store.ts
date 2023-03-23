@@ -2,10 +2,9 @@ import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { Backend, IBackend } from "../backend";
 import { FileUtility, IFileUtility } from "../file-utility";
-import { IImageFile } from "../image";
+import { IImageFile, ImageFile } from "../image";
 import { IImageLoader, ImageLoader } from "../image-loader";
 import { createMainStore } from "./main";
-import { ToastNotification } from "../toast-notification";
 
 export const createimageStore = defineStore("image-store", () => {
     const imageLoader = ref<IImageLoader>(new ImageLoader());
@@ -14,18 +13,13 @@ export const createimageStore = defineStore("image-store", () => {
     const backend = ref<IBackend>(new Backend());
     const files = ref(new Array<string>());
     const fileIndex = ref(0);
-    const intervalIndex = ref(0);
     const store = createMainStore();
 
     async function getFiles(fileList: string): Promise<string[]> {
         const storedFiles = await imageLoader.value.getFiles(fileList);
 
-        const mappedFiles = storedFiles.map((f, i) => ({
-            index: i,
-            fileName: f,
-            name: fileUtility.value.getFileName(f),
-            comment: ""
-        } as IImageFile));
+        const mappedFiles = storedFiles.map((f, i) => (ImageFile
+            .create(i, f, fileUtility.value.getFileName(f), "", undefined)));
         imageFiles.value = mappedFiles;
         files.value = storedFiles;
 

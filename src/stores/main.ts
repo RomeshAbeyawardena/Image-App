@@ -10,9 +10,7 @@ export const createMainStore = defineStore('main', () => {
     const notification = ref<IToastNotification>(new ToastNotification());
 
     function notify(heading:string,body:string|undefined,interval:number|null){
-        const toast = new ToastNotification();
-            toast.heading = heading;
-            toast.body = body; 
+        const toast = ToastNotification.create(heading, body, false);
         setNotification(toast, interval);
     }
     function setNotification(toast:IToastNotification, interval:number|null){
