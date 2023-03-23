@@ -178,12 +178,14 @@ body {
     }
 
     div.bottom-group {
+
         &.v-enter-active,
         &.v-leave-active {
-          transition: bottom 2s linear;
+            transition: bottom 1s linear;
         }
-      
+
         &.v-enter-from {
+            position: absolute;
             bottom: -45px;
         }
 
@@ -193,11 +195,11 @@ body {
 
         &.v-leave-from {
             bottom: 0;
+            position: absolute;
         }
 
         &.v-leave-to {
-            bottom: -45;  
-            display: none;
+            bottom: -45px;
         }
     }
 
@@ -208,6 +210,7 @@ body {
         display: flex;
         padding: 0.2rem 0.5rem;
         position: sticky;
+        width: calc(100% - 1rem);
 
         div.spacer {
             flex-grow: 1;
