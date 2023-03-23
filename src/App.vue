@@ -126,6 +126,8 @@ function comment_onBlur(){
   <MenuNav />
   <imagePreview />
   <div v-if="!fullScreenMode" class="text-field search-field">
-    <input type="text" v-model="currentImage.comment" @keyup="comment_onBlur" placeholder="Comment" />
+    <input type="text" v-model="currentImage.comment" 
+          tabindex="-1"  
+          @keyup="comment_onBlur" placeholder="Comment" />
   </div>
 </template>
