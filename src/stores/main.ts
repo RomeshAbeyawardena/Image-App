@@ -1,21 +1,21 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { IToast, Toast } from "../toast";
+import { IToastNotification, ToastNotification } from "../toast-notification";
 
 export const createMainStore = defineStore('main', () => {
     const isPopupShown = ref(false);
     const fullScreenMode = ref(false);
     const zoomMode = ref(false);
     const isLoading = ref(false);
-    const notification = ref<IToast>(new Toast());
+    const notification = ref<IToastNotification>(new ToastNotification());
 
     function notify(heading:string,body:string|undefined,interval:number|null){
-        const toast = new Toast();
+        const toast = new ToastNotification();
             toast.heading = heading;
             toast.body = body; 
         setNotification(toast, interval);
     }
-    function setNotification(toast:IToast, interval:number|null){
+    function setNotification(toast:IToastNotification, interval:number|null){
         notification.value = toast;
         
         if(interval != null) {

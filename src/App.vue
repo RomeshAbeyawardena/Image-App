@@ -108,7 +108,7 @@ onMounted(() => {
 
 const timeOutId = ref(0)
 function comment_onBlur(){
-  
+  currentImage.value.lastUpdated = new Date();
   if(timeOutId.value) {
     clearTimeout(timeOutId.value);
     timeOutId.value = 0;

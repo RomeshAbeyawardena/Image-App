@@ -1,4 +1,5 @@
 import { IImageFile } from "../image";
+import dayjs from "dayjs";
 
 export interface IBackend {
     set(key: string, value:any):void;
@@ -12,9 +13,8 @@ export class Backend implements IBackend {
         let indexCount = 0;
         imageFiles.forEach(f => {
             const savedImage = this.get<IImageFile>(f.fileName);
-
             if(savedImage == null) return;
-
+            f.lastUpdated = savedImage.lastUpdated;
             f.comment = savedImage.comment;
             indexCount++;
         });
@@ -23,7 +23,19 @@ export class Backend implements IBackend {
     }
     
     save(imageFiles: IImageFile[]): number {
-        const imagesToSave = imageFiles.filter(i => i.comment.length);
+        
+        const imagesToSave = imageFiles.filter(i => { 
+            const image = this.get<IImageFile>(i.fileName);
+            if(i.lastUpdated == undefined || image == null || image.lastUpdated == undefined)
+            {
+                return i.comment.length;
+            }
+
+            const newLastUpdated = dayjs(i.lastUpdated);
+            const oldLastUpdated = dayjs(image.lastUpdated);
+
+            return newLastUpdated.isAfter(oldLastUpdated) && i.comment.length;
+        });
 
         imagesToSave.forEach(i => this.set(i.fileName, i));
         return imageFiles.length;

@@ -5,7 +5,7 @@ import { FileUtility, IFileUtility } from "../file-utility";
 import { IImageFile } from "../image";
 import { IImageLoader, ImageLoader } from "../image-loader";
 import { createMainStore } from "./main";
-import { Toast } from "../toast";
+import { ToastNotification } from "../toast-notification";
 
 export const createimageStore = defineStore("image-store", () => {
     const imageLoader = ref<IImageLoader>(new ImageLoader());

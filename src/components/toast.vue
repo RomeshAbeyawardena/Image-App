@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import "../scss/toast.scss";
-import { Toast } from "../toast";
+import { ToastNotification } from "../toast-notification";
 const props = defineProps({
-    data: Toast
+    data: ToastNotification
 });
 
 
