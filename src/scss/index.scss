@@ -74,7 +74,9 @@ body {
             }
         }
     }
-
+    div.container {
+        height: calc(100dvh - 9rem);
+    }
     div.title-panel {
         align-items: center;
         background-color: $color-primary-4;

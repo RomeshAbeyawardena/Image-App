@@ -20,7 +20,7 @@ onMounted(async () => {
     document.addEventListener("resize", () => {
         setImagePlaceholderSize();
     });
-    await imageStore.getFiles("files.json");
+    await imageStore.getFiles("files2.json");
     setImagePlaceholderSize();
 });
 
