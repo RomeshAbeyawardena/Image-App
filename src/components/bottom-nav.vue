@@ -3,20 +3,19 @@
 import { ref } from "vue";
 import { createMainStore } from "../stores/main";
     const store = createMainStore();
-    const { fullScreenMode } = storeToRefs(store);
-    const showToolbar = ref(false);
+    const { fullScreenMode, showBottomToolbar } = storeToRefs(store);
     
 </script>
 <template>
-    <div class="btn-bottom-tab" v-if="!fullScreenMode && !showToolbar">
-        <a class="btn" @click="$event => showToolbar=true" href="#">
+    <div class="btn-bottom-tab" v-if="!fullScreenMode && !showBottomToolbar">
+        <a class="btn" @click="$event => showBottomToolbar=true" href="#">
             <font-awesome-icon icon="circle-chevron-up" />
         </a>
     </div>
-    <div class="bottom-nav" v-if="!fullScreenMode && showToolbar">
+    <div class="bottom-nav" v-if="!fullScreenMode && showBottomToolbar">
         <h3>SX Viewer</h3>
         <div class="spacer">&nbsp;</div>
-        <a class="btn btn-hide" @click="$event => showToolbar=false" href="#">
+        <a class="btn btn-hide" @click="$event => showBottomToolbar=false" href="#">
             <font-awesome-icon icon="circle-chevron-down" />
         </a>
     </div>

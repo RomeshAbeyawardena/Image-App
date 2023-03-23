@@ -8,6 +8,7 @@ export const createMainStore = defineStore('main', () => {
     const zoomMode = ref(false);
     const isLoading = ref(false);
     const notification = ref<IToastNotification>(new ToastNotification());
+    const showBottomToolbar = ref(false);
 
     function notify(heading:string,body:string|undefined,interval:number|null){
         const toast = ToastNotification.create(heading, body, false);
@@ -25,5 +26,5 @@ export const createMainStore = defineStore('main', () => {
     }
 
     return { isLoading, isPopupShown, fullScreenMode, notify, 
-                notification, setNotification, zoomMode };
+                notification, setNotification, zoomMode, showBottomToolbar };
 });
