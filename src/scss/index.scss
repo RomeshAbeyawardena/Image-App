@@ -177,6 +177,30 @@ body {
         }
     }
 
+    div.bottom-group {
+        &.v-enter-active,
+        &.v-leave-active {
+          transition: bottom 2s linear;
+        }
+      
+        &.v-enter-from {
+            bottom: -45px;
+        }
+
+        &.v-enter-to {
+            bottom: 0;
+        }
+
+        &.v-leave-from {
+            bottom: 0;
+        }
+
+        &.v-leave-to {
+            bottom: -45;  
+            display: none;
+        }
+    }
+
     div.bottom-nav {
         align-items: center;
         background-color: $color-primary-0;
@@ -201,6 +225,5 @@ body {
             margin: 0;
             padding: 0;
         }
-
     }
 }
