@@ -25,7 +25,7 @@ body {
         width: 12rem;
         overflow-x: hidden;
         overflow-y: auto;
-
+        z-index: 99999;
         .text-field {
             background: $background-primary;
             margin: 0.1rem;

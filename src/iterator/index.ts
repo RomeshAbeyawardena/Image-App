@@ -1,6 +1,7 @@
-export function Iterator<T>(array: Array<T>, amount: number) {
-    let current = 0,
-        length = array.length;
+export function Iterator<T>(array: Array<T>, amount: number, currentIndex?: number) {
+
+    let current = currentIndex ?? 0;
+    length = array.length;
 
     return () => {
         let end = current + amount;
