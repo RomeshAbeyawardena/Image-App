@@ -19,6 +19,7 @@
     "dayjs": "^1.11.7",
     "eruda": "^2.11.3",
     "pinia": "^2.0.33",
+    "swiper": "6",
     "vue": "^3.2.47"
   },
   "devDependencies": {

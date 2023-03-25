@@ -9,6 +9,7 @@ import { storeToRefs } from 'pinia';
 import MenuNav from './components/menu-nav.vue';
 import Toast from './components/toast.vue';
 import bottomNav from './components/bottom-nav.vue';
+import swipeImage from './components/swipe-image.vue';
 const store = createMainStore();
 const { isLoading, isPopupShown, fullScreenMode, notification } = storeToRefs(store);
 const imageStore = createimageStore();
@@ -125,7 +126,7 @@ function comment_onBlur() {
   <loader />
   <menuPopup :visible="isPopupShown" parent-element-selector="a.image-select-btn" />
   <MenuNav />
- <div class="container">
+ <div class="container" v-if="false">
   <imagePreview />
   <div v-if="!fullScreenMode" class="text-field search-field">
     <input type="text" v-model="currentImage.comment" 
@@ -133,5 +134,6 @@ function comment_onBlur() {
           @keyup="comment_onBlur" placeholder="Comment" />
   </div>
 </div>
+  <swipeImage />
   <bottomNav />
 </template>
