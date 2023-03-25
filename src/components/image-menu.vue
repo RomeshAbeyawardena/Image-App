@@ -3,6 +3,7 @@ import { createimageStore } from '../stores/image-store';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { createMainStore } from '../stores/main';
+import { EventSource } from "../event-data";
 
 const props = defineProps({
     filterSearch: String
@@ -29,7 +30,7 @@ function selectImage(index: number) {
     emit("imageSelected", index);
     isPopupShown.value = false;
     fileIndex.value = index;
-    console.log(index);
+    imageStore.setLastEvent(EventSource.menu, index);
 }
 
 function setLinkClass(currentIndex: number): string {

@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { Backend, IBackend } from "../backend";
+import { IEventData, EventSource } from "../event-data";
 import { FileUtility, IFileUtility } from "../file-utility";
 import { IImageFile, ImageFile } from "../image";
 import { IImageLoader, ImageLoader } from "../image-loader";
@@ -13,6 +14,7 @@ export const createimageStore = defineStore("image-store", () => {
     const backend = ref<IBackend>(new Backend());
     const files = ref(new Array<string>());
     const fileIndex = ref(0);
+    const lastEvent = ref<IEventData>();
     const store = createMainStore();
 
     async function getFiles(fileList: string): Promise<string[]> {
@@ -68,9 +70,17 @@ export const createimageStore = defineStore("image-store", () => {
         fileIndex.value--;
     }
 
+    function setLastEvent(source:EventSource, value:any) {
+        lastEvent.value = {
+            value,
+            source
+        }
+    }
+
     return {
         backend,
         imageLoader, imageFiles, fileUtility, currentImage, fileIndex, files,
+        lastEvent, setLastEvent,
         increment, decrement, getFiles, getImageFileByIndex, getFileByIndex,
         saveChanges
     };
