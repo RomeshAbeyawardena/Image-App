@@ -1,19 +1,22 @@
 <script setup lang="ts">
 import 'swiper/swiper.scss';
 import { storeToRefs } from 'pinia';
-import SwiperCore, { Virtual, Lazy } from 'swiper';
+import SwiperCore, { Virtual } from 'swiper';
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount, ref, computed } from "vue";
 import { createimageStore } from '../stores/image-store';
 import { Iterator } from '../iterator';
 import { IImageFile } from '../image';
 import { createMainStore } from '../stores/main';
 
+SwiperCore.use([Virtual]);
+
 const store = createMainStore();
 const { isLoading, fullScreenMode } = storeToRefs(store);
 const imageStore = createimageStore();
-const { imageFiles } = storeToRefs(imageStore);
+const { fileIndex, imageFiles } = storeToRefs(imageStore);
 const cachedImages = ref<Array<IImageFile>>();
+
 let getNextImages: () => Array<IImageFile>;
 
 onBeforeMount(async () => {
@@ -23,42 +26,41 @@ onBeforeMount(async () => {
     cachedImages.value = getNextImages();
     isLoading.value = false;
 });
-function loadImage(swiper: SwiperCore) {
+
+function loadImages(swiper: SwiperCore) {
     isLoading.value = true;
     if (cachedImages.value == undefined) {
         return;
     }
-    
-    if (swiper.activeIndex == cachedImages.value.length - 1) {
+    fileIndex.value = swiper.activeIndex;
+    if (fileIndex.value == cachedImages.value.length - 1) {
         getNextImages().forEach(i => cachedImages.value?.push(i));
     }
+    
     isLoading.value = false;
 }
 
 function setImageClass() {
     const baseClass = "image-placeholder";
-    
-    if(fullScreenMode.value) {
+
+    if (fullScreenMode.value) {
         return baseClass + " fullscreen";
     }
 
     return baseClass;
 }
 
+function toggleFullScreen() {
+    fullScreenMode.value = !fullScreenMode.value;
+}
+
 </script>
 <template>
-    <swiper :slides-per-view="1" :space-between="50" @active-index-change="loadImage">
-        <swiper-slide 
-            v-for="(imageFile, i) in cachedImages" 
-            :swiper-ref="SwiperCore"
-            :ref_key="imageFile.fileName">
+    <swiper :slides-per-view="1" :space-between="50" @active-index-change="loadImages" :virtual="true">
+        <swiper-slide v-for="(imageFile, i) in cachedImages" :swiper-ref="SwiperCore" :ref_key="imageFile.fileName">
+            <a href="#" aria-role-description="button" role="button" @click="toggleFullScreen">
             <img :class="setImageClass()" :src="imageFile.fileName" :alt="imageFile.name" />
+            </a>
         </swiper-slide>
     </swiper>
 </template>
-<style lang="scss">
-.slide {
-    height: 300px;
-    background-color: red;
-}
-</style>

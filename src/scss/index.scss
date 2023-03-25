@@ -76,8 +76,15 @@ body {
     }
     div.container {
         height: calc(100dvh - 9rem);
+        // div.swiper-container {
+            
+        // }
     }
     div.title-panel {
+        position: sticky;
+        top: 0;
+        left: 0;
+        z-index: 9999;
         align-items: center;
         background-color: $color-primary-4;
         padding: 1rem;

@@ -47,5 +47,4 @@ function comment_onBlur() {
           @keyup="comment_onBlur" placeholder="Comment" />
   </div>
 </div>
-  <bottomNav />
 </template>
