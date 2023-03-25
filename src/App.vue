@@ -39,14 +39,13 @@ function comment_onBlur() {
   <loader />
   <menuPopup :visible="isPopupShown" parent-element-selector="a.image-select-btn" />
   <MenuNav />
- <div class="container" v-if="false">
-  <imagePreview />
+ <div class="container">
+  <swipeImage />
   <div v-if="!fullScreenMode" class="text-field search-field">
     <input type="text" v-model="currentImage.comment" 
           tabindex="-1"  
           @keyup="comment_onBlur" placeholder="Comment" />
   </div>
 </div>
-  <swipeImage />
   <bottomNav />
 </template>

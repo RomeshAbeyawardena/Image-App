@@ -10,7 +10,7 @@ import { IImageFile } from '../image';
 import { createMainStore } from '../stores/main';
 
 const store = createMainStore();
-const { isLoading } = storeToRefs(store);
+const { isLoading, fullScreenMode } = storeToRefs(store);
 const imageStore = createimageStore();
 const { imageFiles } = storeToRefs(imageStore);
 const cachedImages = ref<Array<IImageFile>>();
@@ -35,6 +35,16 @@ function loadImage(swiper: SwiperCore) {
     isLoading.value = false;
 }
 
+function setImageClass() {
+    const baseClass = "image-placeholder";
+    
+    if(fullScreenMode.value) {
+        return baseClass + " fullscreen";
+    }
+
+    return baseClass;
+}
+
 </script>
 <template>
     <swiper :slides-per-view="1" :space-between="50" @active-index-change="loadImage">
@@ -42,7 +52,7 @@ function loadImage(swiper: SwiperCore) {
             v-for="(imageFile, i) in cachedImages" 
             :swiper-ref="SwiperCore"
             :ref_key="imageFile.fileName">
-            <img :src="imageFile.fileName" :alt="imageFile.name" />
+            <img :class="setImageClass()" :src="imageFile.fileName" :alt="imageFile.name" />
         </swiper-slide>
     </swiper>
 </template>
