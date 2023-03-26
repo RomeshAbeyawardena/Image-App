@@ -1,16 +1,16 @@
 type RequestResult<Data> = Promise<{ response: Response; data: Data; }>;
 
-type ApiImageGetParams0 = { "query"?: { "PageIndex"?: number; "TotalItemsPerPage"?: number; "OrderByFields"?: (string)[]; "SortOrder"?: "Ascending" | "Descending"; "NoTracking"?: boolean; }; };
+type ApiImageGetParams0 = { "query"?: { "PageIndex"?: number; "TotalItemsPerPage"?: number; "OrderByFields"?: (string)[]; "SortOrder"?: "Ascending" | "Descending"; "NoTracking"?: boolean; "FileName"?: string; "Name"?: string; "Id"?: string; "Index"?: number; }; };
 type ApiImageGetAddedParams0 = { "header"?: { "Content-Type": "text/plain"; }; };
 type ApiImageGetResult0 = RequestResult<{ "pageNumber"?: number; "numberOfPages"?: number; "totalItems"?: number; "results"?: ({ "id"?: string; "name"?: string; "fileName"?: string; "created"?: string; "modified"?: string; })[]; "value"?: { "nullable"?: ; "readOnly"?: ; }; "message"?: string; "statusCode"?: number; "isSuccessful"?: boolean; }>;
 export function apiImageGet(params: ApiImageGetParams0 & ApiImageGetAddedParams0): ApiImageGetResult0;
 
-type ApiImageGetParams1 = { "query"?: { "PageIndex"?: number; "TotalItemsPerPage"?: number; "OrderByFields"?: (string)[]; "SortOrder"?: "Ascending" | "Descending"; "NoTracking"?: boolean; }; };
+type ApiImageGetParams1 = { "query"?: { "PageIndex"?: number; "TotalItemsPerPage"?: number; "OrderByFields"?: (string)[]; "SortOrder"?: "Ascending" | "Descending"; "NoTracking"?: boolean; "FileName"?: string; "Name"?: string; "Id"?: string; "Index"?: number; }; };
 type ApiImageGetAddedParams1 = { "header"?: { "Content-Type": "application/json"; }; };
 type ApiImageGetResult1 = RequestResult<{ "pageNumber"?: number; "numberOfPages"?: number; "totalItems"?: number; "results"?: ({ "id"?: string; "name"?: string; "fileName"?: string; "created"?: string; "modified"?: string; })[]; "value"?: { "nullable"?: ; "readOnly"?: ; }; "message"?: string; "statusCode"?: number; "isSuccessful"?: boolean; }>;
 export function apiImageGet(params: ApiImageGetParams1 & ApiImageGetAddedParams1): ApiImageGetResult1;
 
-type ApiImageGetParams2 = { "query"?: { "PageIndex"?: number; "TotalItemsPerPage"?: number; "OrderByFields"?: (string)[]; "SortOrder"?: "Ascending" | "Descending"; "NoTracking"?: boolean; }; };
+type ApiImageGetParams2 = { "query"?: { "PageIndex"?: number; "TotalItemsPerPage"?: number; "OrderByFields"?: (string)[]; "SortOrder"?: "Ascending" | "Descending"; "NoTracking"?: boolean; "FileName"?: string; "Name"?: string; "Id"?: string; "Index"?: number; }; };
 type ApiImageGetAddedParams2 = { "header"?: { "Content-Type": "text/json"; }; };
 type ApiImageGetResult2 = RequestResult<{ "pageNumber"?: number; "numberOfPages"?: number; "totalItems"?: number; "results"?: ({ "id"?: string; "name"?: string; "fileName"?: string; "created"?: string; "modified"?: string; })[]; "value"?: { "nullable"?: ; "readOnly"?: ; }; "message"?: string; "statusCode"?: number; "isSuccessful"?: boolean; }>;
 export function apiImageGet(params: ApiImageGetParams2 & ApiImageGetAddedParams2): ApiImageGetResult2;
