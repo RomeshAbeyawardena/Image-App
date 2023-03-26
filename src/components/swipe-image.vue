@@ -25,7 +25,7 @@ function getImages(next: boolean, currentIndex: number, takeCurrent: boolean) {
     const c = collect(imageFiles.value);
     console.log(currentIndex);
     const m = currentIndex == 0 ? c : c.skip(takeCurrent ? currentIndex : currentIndex + 1);
-    const a = m!.take(next ? 3 : -3).toArray<IImageFile>();
+    const a = m!.take(next ? 3 : -3).toArray() as Array<IImageFile>;
     return a;
 }
 
@@ -63,7 +63,7 @@ function populateImageFiles(imageFiles: IImageFile[]) {
         return;
     }
     //console.log(firstElement.index);
-    cachedImages.value.splice(firstElement.index, imageFiles.length, ...imageFiles);
+    cachedImages.value.splice(firstElement.index, 0, ...imageFiles);
 }
 
 onBeforeMount(async () => {
