@@ -5,8 +5,8 @@ import { IEventData, EventSource } from "../event-data";
 import { FileUtility, IFileUtility } from "../file-utility";
 import { IImageFile, ImageFile } from "../image";
 import { IImageLoader, ImageLoader } from "../image-loader";
-import { createMainStore } from "./main";
-import { apiImageGet } from  "../api";
+import { } from "./main";
+
 export const createimageStore = defineStore("image-store", () => {
     const imageLoader = ref<IImageLoader>(new ImageLoader());
     const fileUtility = ref<IFileUtility>(new FileUtility());
@@ -19,9 +19,7 @@ export const createimageStore = defineStore("image-store", () => {
 
     async function getFiles(fileList: string): Promise<string[]> {
         const storedFiles = await imageLoader.value.getFiles(fileList);
-        apiImageGet({
-            
-        });
+        
         const mappedFiles = storedFiles.map((f, i) => (ImageFile
             .create(i, f, fileUtility.value.getFileName(f), "", undefined)));
         imageFiles.value = mappedFiles;

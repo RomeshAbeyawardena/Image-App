@@ -14,6 +14,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/vue-fontawesome": "^3.0.3",
+    "@openapitools/openapi-generator-cli": "^2.5.2",
     "@popperjs/core": "^2.11.6",
     "axios": "^1.3.4",
     "collect.js": "^4.34.3",
@@ -25,7 +26,6 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
-    "openapi": "^1.0.1",
     "sass": "^1.59.3",
     "typescript": "^4.9.3",
     "vite": "^4.2.0",
